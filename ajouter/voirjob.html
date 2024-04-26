@@ -1,0 +1,99 @@
+
+<h1>Find below our Job Openings</h1>
+<div class="myad">
+<div class="left">
+<h1>
+<%="Captain/Driver" if job["title"] == "1" else ""%>
+</h1>
+<p>
+<b>Location:</b>
+<%=job["location"]%>
+</p>
+<p>
+<b>Type:</b>
+<%="Part time" if job["type"] == "parttime" else ""%>
+<%="Full Time" if job["type"] == "fulltime" else ""%>
+</p>
+<p>
+<b>Salary:</b>
+<%="Below average" if job["type"] == "1" else ""%>
+<%="average" if job["type"] == "2" else ""%>
+<%="above average" if job["type"] == "3" else ""%>
+</p>
+<p>
+<b>About us:</b>
+<%=job["aboutus"] %>
+</p>
+<p>
+<b>Job description:</b>
+<%=job["description"] %>
+</p>
+<p>
+<b>Responsibilities:</b>
+<%=job["responsibilities"] %>
+</p>
+<p>
+<b>Requirements:</b>
+<%=job["requirements"] %>
+</p>
+<p>
+<b>how to apply:</b>
+<%=job["howtoapply"] %>
+</p>
+
+</div>
+<div class="right">
+<form action="/createapplication" method="post">
+<input type="hidden" name="user_id" value="<%=session["user_id"]%>" id="address_user"/>
+<div class="field">
+<label for="job_firstname">first name</label>
+<input type="text" name="firstname" id="job_firstname"/>
+</div>
+<div class="field">
+<label for="job_location">last name</label>
+<input type="text" name="lastname" id="job_lastname"/>
+</div>
+<div class="field">
+<label for="job_dateofbirth">date of birth</label>
+<input type="text" name="dateofbirth" id="job_dateofbirth"/>
+</div>
+<div class="field">
+<label for="job_email">email</label>
+<input type="text" name="email" id="job_email"/>
+</div>
+<div class="field">
+<label for="job_phone">phone</label>
+<input type="text" name="phone" id="job_phone"/>
+</div>
+<div class="field">
+<label for="job_position">position</label>
+<input type="text" name="position" id="job_position"/>
+</div>
+<div class="field">
+<label for="job_startdate">available start date</label>
+<input type="text" name="startdate" id="job_startdate"/>
+</div>
+<div class="field">
+<label for="job_coverletter">captain/driver cover letter</label>
+<input type="file" name="coverletter" id="job_coverletter"/>
+</div>
+<div class="field">
+<label for="job_cv">captain/driver cv</label>
+<input type="file" name="cv" id="job_cv"/>
+</div>
+<div class="field">
+<label for="job_transport">as tu tes moyens de transport personnels?</label>
+<select name="transport" name="transport" id="job_transport">
+<option value=""></option>
+<option value="1">Oui</option>
+<option value="0">Non</option>
+</select>
+</div>
+<div class="field">
+<input type="submit" value="ok" name="apply" id="address_submit"/>
+</div>
+</form>
+
+
+</div>
+</div>

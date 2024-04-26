@@ -10,8 +10,8 @@ class Country(Model):
         self.cur=self.con.cursor()
         self.cur.execute("""create table if not exists country(
         id integer primary key autoincrement,
-        name text,
-            phone text,
+        phone text,
+            name text,
             unicode text
                     );""")
         self.con.commit()
@@ -51,7 +51,7 @@ class Country(Model):
         print(myhash,myhash.keys())
         myid=None
         try:
-          self.cur.execute("insert into country (name,phone,unicode) values (:name,:phone,:unicode)",myhash)
+          self.cur.execute("insert into country (phone,name,unicode) values (:phone,:name,:unicode)",myhash)
           self.con.commit()
           myid=str(self.cur.lastrowid)
         except Exception as e:

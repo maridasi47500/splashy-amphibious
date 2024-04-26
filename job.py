@@ -3,39 +3,39 @@ import sqlite3
 import sys
 import re
 from model import Model
-class Somepic(Model):
+class Job(Model):
     def __init__(self):
         self.con=sqlite3.connect(self.mydb)
         self.con.row_factory = sqlite3.Row
         self.cur=self.con.cursor()
-        self.cur.execute("""create table if not exists somepic(
+        self.cur.execute("""create table if not exists job(
         id integer primary key autoincrement,
-        member_id integer,
-            name text,
+        user_id integer,
             title text,
-            post_id integer,
-            user_id integer
+            location text,
+            type text,
+            salary text,
+            aboutus text,
+            description text,
+            responsibilities text,
+            requirements text,
+            howtoapply text
                     );""")
         self.con.commit()
         #self.con.close()
-    def findallpicpost(self,wow):
-        self.cur.execute("select * from somepic where post_id = ?",(wow,))
-
-        row=self.cur.fetchall()
-        return row
     def getall(self):
-        self.cur.execute("select * from somepic")
+        self.cur.execute("select * from job")
 
         row=self.cur.fetchall()
         return row
     def deletebyid(self,myid):
 
-        self.cur.execute("delete from somepic where id = ?",(myid,))
+        self.cur.execute("delete from job where id = ?",(myid,))
         job=self.cur.fetchall()
         self.con.commit()
         return None
     def getbyid(self,myid):
-        self.cur.execute("select * from somepic where id = ?",(myid,))
+        self.cur.execute("select * from job where id = ?",(myid,))
         row=dict(self.cur.fetchone())
         print(row["id"], "row id")
         job=self.cur.fetchall()
@@ -58,14 +58,14 @@ class Somepic(Model):
         print(myhash,myhash.keys())
         myid=None
         try:
-          self.cur.execute("insert into somepic (title,member_id,name,post_id,user_id) values (:title,:member_id,:name,:post_id,:user_id)",myhash)
+          self.cur.execute("insert into job (user_id,title,location,type,salary,aboutus,description,responsibilities,requirements,howtoapply) values (:user_id,:title,:location,:type,:salary,:aboutus,:description,:responsibilities,:requirements,:howtoapply)",myhash)
           self.con.commit()
           myid=str(self.cur.lastrowid)
         except Exception as e:
           print("my error"+str(e))
         azerty={}
-        azerty["somepic_id"]=myid
-        azerty["notice"]="votre somepic a été ajouté"
+        azerty["job_id"]=myid
+        azerty["notice"]="votre job a été ajouté"
         return azerty
 
 

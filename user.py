@@ -42,6 +42,15 @@ class User(Model):
           row["notice"]="le numero de téléphone ou le mot de passe ne sont pas bon"
           row["user_id"]=""
         return row
+    def findbyid(self,myid):
+        try:
+          self.cur.execute("select * from user where id = ?",(myid,))
+          row=dict(self.cur.fetchone())
+          print(row["id"], "row id")
+          job=self.cur.fetchall()
+          return row
+        except:
+          return {"email":""}
     def getbyid(self,myid):
         self.cur.execute("select * from user where id = ?",(myid,))
         row=dict(self.cur.fetchone())

@@ -23,7 +23,7 @@ function myband(value){
 }
 
 $(function(){
-if (window.location.pathname !== "/sign_in" && window.location.pathname !== "/sign_up" && window.location.pathname !== "/aboutme" && myuserid.innerHTML == "") {
+if (window.location.pathname === "/addjob" && myuserid.innerHTML == "") {
 alert("pas connecté-e vous allez être redirigé(e)")
 window.location="/sign_in";
 

@@ -14,7 +14,7 @@ import sys
 class Route():
     def __init__(self):
         self.dbUsers=User()
-        self.Program=Directory("You Email")
+        self.Program=Directory("Splashy Iguana Tours")
         self.Program.set_path("./")
         self.mysession={"notice":None,"email":None,"name":None}
         self.render_figure=RenderFigure(self.Program)
@@ -243,12 +243,6 @@ class Route():
         return self.render_figure.render_figure("welcome/aboutme.html")
     def hello(self,search):
         print("hello action")
-        print("hello action")
-        #self.render_figure.set_param("piece",self.dbPiece.getall())
-        #self.render_figure.set_param("practice",self.dbPractice.getall())
-        #self.render_figure.set_param("pen",self.dbPen.getall())
-        #self.render_figure.set_param("notebook",self.dbNotebook.getall())
-        print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
     def delete_user(self,params={}):
         getparams=("id",)
@@ -269,12 +263,12 @@ class Route():
         myparam=self.get_this_route_param(getparams,params)
         self.render_figure.set_param("post",self.db.Post.getbyid(myparam["id"]))
         return self.render_figure.render_figure("ajouter/editerpost.html")
-    def voirpost(self,params={}):
+    def seejob(self,params={}):
         getparams=("id",)
         print("get param, action see my new",getparams)
         myparam=self.get_this_route_param(getparams,params)
-        self.render_figure.set_param("post",self.db.Post.getbyid(myparam["id"]))
-        return self.render_figure.render_figure("ajouter/voirpost.html")
+        self.render_figure.set_param("job",self.db.Job.getbyid(myparam["id"]))
+        return self.render_figure.render_figure("ajouter/voirjob.html")
     def voirpersonne(self,params={}):
         getparams=("id",)
         print("get param, action see my new",getparams)
@@ -317,8 +311,8 @@ class Route():
         return self.render_figure.render_json()
     def search(self,search): 
         return self.render_figure.render_figure("ajouter/search.html")
-    def addpost(self,search): 
-        return self.render_figure.render_figure("ajouter/post.html")
+    def addjob(self,search): 
+        return self.render_figure.render_figure("ajouter/job.html")
     def addmember(self,search): 
         return self.render_figure.render_figure("ajouter/member.html")
     def carnetdadresses(self,search):
@@ -422,6 +416,9 @@ class Route():
         elif path and path.endswith("mp3"):
             self.Program=Music(path)
             self.Program.set_path("./")
+        elif path and path.endswith("webp"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
         elif path and path.endswith("jpeg"):
             self.Program=Pic(path)
             self.Program.set_path("./")
@@ -444,26 +441,8 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
-            '^/createmusician$': self.createmusician,
-            '^/createband$': self.createband,
-            '^/createpost$': self.createpost,
-            '^/createmember$': self.createmember,
-            '^/createaddress$': self.createaddress,
-            '^/sendemail$': self.sendemail,
-            '^/carnetdadresses$': self.carnetdadresses,
-            '^/myurl$': self.myurl,
-            '^/myband$': self.myband,
-            '^/mydiv$': self.mydiv,
-            '^/search$': self.search,
-            '^/voirsearch$': self.voirsearch,
-            '^/ajoutermusician$': self.addmusician,
-            '^/ajouterband$': self.addband,
-            '^/ajouterpost$': self.addpost,
-            '^/voirpost/([0-9]+)$': self.voirpost,
-            '^/editerpost/([0-9]+)$': self.editerpost,
-            '^/updatepost$': self.updatepost,
-            '^/ajoutermember$': self.addmember,
-            '^/aboutme$': self.aboutme,
+            '^/addjob$': self.addjob,
+            "^/seejob/([0-9]+)$":self.seejob,
             '^/welcome$': self.welcome,
             '^/sign_in$': self.signin,
             '^/sign_up$': self.signup,

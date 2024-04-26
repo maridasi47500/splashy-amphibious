@@ -1,6 +1,7 @@
-- bienvenue à you email 
+- bienvenue à splashy tours
+- se connecter pour déposer des annonces de conducteur/conductrice/capitaine pour les visites de bateau et bus
+- résever 1 tour
 
-- email fake inbox
 - lancer:
 ```
 $ sh mysite.sh

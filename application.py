@@ -3,30 +3,39 @@ import sqlite3
 import sys
 import re
 from model import Model
-class Band(Model):
+class Application(Model):
     def __init__(self):
         self.con=sqlite3.connect(self.mydb)
         self.con.row_factory = sqlite3.Row
         self.cur=self.con.cursor()
-        self.cur.execute("""create table if not exists band(
+        self.cur.execute("""create table if not exists application(
         id integer primary key autoincrement,
-        name text
+        job_id integer,
+            firstname text,
+            lastname text,
+            dateofbirth text,
+            email text,
+            phone text,
+            start_date text,
+            coverletter text,
+            cv text,
+            transport integer
                     );""")
         self.con.commit()
         #self.con.close()
     def getall(self):
-        self.cur.execute("select * from band")
+        self.cur.execute("select * from application")
 
         row=self.cur.fetchall()
         return row
     def deletebyid(self,myid):
 
-        self.cur.execute("delete from band where id = ?",(myid,))
+        self.cur.execute("delete from application where id = ?",(myid,))
         job=self.cur.fetchall()
         self.con.commit()
         return None
     def getbyid(self,myid):
-        self.cur.execute("select * from band where id = ?",(myid,))
+        self.cur.execute("select * from application where id = ?",(myid,))
         row=dict(self.cur.fetchone())
         print(row["id"], "row id")
         job=self.cur.fetchall()
@@ -49,14 +58,14 @@ class Band(Model):
         print(myhash,myhash.keys())
         myid=None
         try:
-          self.cur.execute("insert into band (name) values (:name)",myhash)
+          self.cur.execute("insert into application (job_id,firstname,lastname,dateofbirth,email,phone,start_date,coverletter,cv,transport) values (:job_id,:firstname,:lastname,:dateofbirth,:email,:phone,:start_date,:coverletter,:cv,:transport)",myhash)
           self.con.commit()
           myid=str(self.cur.lastrowid)
         except Exception as e:
           print("my error"+str(e))
         azerty={}
-        azerty["band_id"]=myid
-        azerty["notice"]="votre band a été ajouté"
+        azerty["application_id"]=myid
+        azerty["notice"]="votre application a été ajouté"
         return azerty
 
 

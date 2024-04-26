@@ -1,6 +1,6 @@
  <!DOCTYPE html><html>
         <head>
-        <title>YouEmail</title>
+        <title>splashy iguana tour</title>
 <meta charset="UTF-8">
 
 
@@ -15,7 +15,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Bienvenue</a>
+    <a class="navbar-brand" href="/"><img src="/pic/iguane.webp"/>Splashy Iguana Tours</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,18 +23,16 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	<%=Fichier("./mypage","connexion.html").lire() if session["user_id"] == "" else Fichier("./mypage","deconnexion.html").lire() %>
         <li class="nav-item">
-          <a class="nav-link" href="/aboutme">ABout me</a>
+          <a class="nav-link" href="/booktour">Réserver une visite</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/apply">Apply</a>
         </li>
       </ul>
-      <form class="d-flex searchform" role="search" action="/voirsearch" method="post">
-        <input class="form-control me-2" name="search" type="search" placeholder="chercher 1 email" aria-label="chercher 1 email">
-        <button class="btn btn-outline-success" type="submit">Chercher</button>
-      </form>
     </div>
   </div>
 </nav>
         <h1>{debutmots}</h1>
-<div id="nbgroup" hidden><%=len(db.Band.getall())%></div>
 <div id="notice"><%=session["notice"]%></div>
 <div id="myuserid" hidden><%=session["user_id"]%></div>
         {plusdemot}

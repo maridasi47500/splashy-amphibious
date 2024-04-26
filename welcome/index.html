@@ -1,35 +1,4 @@
-
-<%=Fichier("./welcome","notsignedin.html").lire() if session["user_id"] == "" else Fichier("./welcome","inbox.html").lire() %>
-
-<div id="overlay">
-<div id="text">
-	<p>
-	Nouveau message
-<span class="brouillons">Mettre dans les brouillons[X]</span>
-	</p>
-	<form id="sendemailform" class="sendemail" action="/sendemail" method="post">
-			<input value="1" type="hidden" id="envoye_email" name="sent"/>
-			<input value="<%=db.User.findbyid(session["user_id"])["email"]%>" type="hidden" id="from_email" name="from"/>
-
-		<div class="field">
-			<label for="from_email">A</label>
-			<select type="email" class="someselect" id="to_email" name="to">
-<option value=""></option>
-<%=render_collection(collection=db.Address.getalladdress(), partial='welcome/_optionaddress.html', as_='address')%>
-</select>
-		</div>
-		<div class="field">
-			<label for="object_email" hidden>Objet</label>
-			<input type="email" id="object_email" placeholder="Objet" name="object"/>
-		</div>
-		<div class="field contentfield">
-			<label for="content_email" hidden>Objet</label>
-			<textarea id="content_email" name="content"></textarea>
-		</div>
-		<div class="actions envoyermessage">
-			<input type="submit" id="submit_email" name="envoyer" class="left" value="&#x1F585;"/>
-			<input type="submit" id="submit_email1" class="right" name="supprimer" value="&#128465;"/>
-		</div>
-	</form>
-</div>
-</div>
+<h1>bienvenue à iguane tour</h1>
+<p>
+Rejoignez Pancho l'iguane pour un voyage inoubliable où l'innovation rencontre l'aventure à bord de notre bus amphibie de 40 pieds, d'une capacité maximale de 33 personnes. Ce qui distingue cette expérience, c'est la capacité du bus à se transformer en bateau en toute transparence. Imaginez la fascination de glisser dans l'eau, tout en restant confortablement assis, alors que le paysage passe des rues animées aux eaux tranquilles, offrant une perspective unique sur la beauté naturelle et urbaine qui nous entoure. Cette transition fluide de la terre à la mer, sans avoir besoin de changer de véhicule, offre une expérience fluide et inégalée, faisant de chaque visite avec Splashy Iguana Tours non seulement un voyage, mais une histoire à raconter.
+</p>
