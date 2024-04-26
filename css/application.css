@@ -84,3 +84,7 @@ input#object_email {
 									        height: 55px;
 										    /* top: revert; */
 									}
+									div#pills-tabContent {
+										    top: 55px;
+										        position: absolute;
+										}
