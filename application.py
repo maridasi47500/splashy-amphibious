@@ -16,6 +16,7 @@ class Application(Model):
             dateofbirth text,
             email text,
             phone text,
+            position text,
             start_date text,
             coverletter text,
             cv text,
@@ -58,7 +59,7 @@ class Application(Model):
         print(myhash,myhash.keys())
         myid=None
         try:
-          self.cur.execute("insert into application (job_id,firstname,lastname,dateofbirth,email,phone,start_date,coverletter,cv,transport) values (:job_id,:firstname,:lastname,:dateofbirth,:email,:phone,:start_date,:coverletter,:cv,:transport)",myhash)
+          self.cur.execute("insert into application (position,job_id,firstname,lastname,dateofbirth,email,phone,start_date,coverletter,cv,transport) values (:position,:job_id,:firstname,:lastname,:dateofbirth,:email,:phone,:start_date,:coverletter,:cv,:transport)",myhash)
           self.con.commit()
           myid=str(self.cur.lastrowid)
         except Exception as e:

@@ -23,12 +23,16 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	<%=Fichier("./mypage","connexion.html").lire() if session["user_id"] == "" else Fichier("./mypage","deconnexion.html").lire() %>
         <li class="nav-item">
-          <a class="nav-link" href="/booktour">Réserver une visite</a>
+          <a class="nav-link" href="/booktour" onclick="myoverlay.value='2';submittour.click();return false;">Réserver une visite</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/apply">Apply</a>
         </li>
       </ul>
+      <form class="d-flex" role="search" id="bookatour" action="/booktour" method="post">
+	      <input type="hidden" id="myoverlay" name="myoverlay" value="1"/>
+		              <button class="btn btn-outline-success" type="submit" id="submittour">Réserver un tour</button>
+			            </form>
     </div>
   </div>
 </nav>

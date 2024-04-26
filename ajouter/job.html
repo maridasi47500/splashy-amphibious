@@ -50,6 +50,3 @@
 <input type="submit" value="ok" name="valider" id="address_submit"/>
 </div>
 </form>
-<table>
-<%=render_collection(collection=db.Address.getall(), partial='welcome/_address.html', as_='address')%>
-</table>

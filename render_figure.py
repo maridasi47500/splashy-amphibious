@@ -10,6 +10,7 @@ class RenderFigure():
     def __init__(self,program):
         self.session={"name":"","notice":"","mysession":False}
         self.mytemplate="./mypage/index.html"
+        self.sometemplates=[]
         self.path=program.get_path()
         self.title=program.get_title()
         self.headingone=program.get_title()
@@ -71,7 +72,7 @@ class RenderFigure():
           return mystr
         except Exception as e:
           print("render body mauvais")
-          l="<div style='background:red;color:white;'>erreurici pour afficher <div class=\"codeerreur\" style=\"background:black;color:white;\">"+k[0]+"</div>"+traceback.format_exc()+"<br>"+str(e)+"</div>".replace("\r\n",'<br>')
+          l="<h1 style='background:red;color:white;'>"+str(e)+"</h1>".replace("\r\n",'<br>')+"<div style='background:red;color:white;'>erreurici pour afficher </div><div class=\"codeerreur\" style=\"background:black;color:white;\">"+k[0]+"</div><div class=\"codeerreur\" style=\"background:blue;color:white;\">en essayant d'afficher"+" ".join(self.sometemplates)+traceback.format_exc()+"</div><br>"
 
           return l
     def render_collection(self, collection,partial,as_,mylocals={}):
@@ -83,7 +84,7 @@ class RenderFigure():
             k=[]
             paspremier=False
             ligne=0
-            loc={"db":Mydb(),"paspremier":False,as_: "","index":"",  "params": self.params,"render_collection":self.render_collection,"date":date,"datetime":datetime}
+            loc={"session":self.session,"db":Mydb(),"paspremier":False,as_: "","index":"",  "params": self.params,"render_collection":self.render_collection,"date":date,"datetime":datetime}
 
             for x in collection:
                 loc["index"]=i
@@ -206,6 +207,7 @@ class RenderFigure():
     def render_figure(self,filename):
         try:
           self.body+=open(os.path.abspath(self.path+"/"+filename),"r").read()
+          self.sometemplates.append(os.path.abspath(self.path+"/"+filename))
           if self.mytemplate is not None:
               self.body= open(os.path.abspath(self.mytemplate),"r").read().format(debutmots=self.title, mot=self.headingone,plusdemot=self.body)
           self.body=self.render_body()

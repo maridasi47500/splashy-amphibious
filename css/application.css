@@ -58,3 +58,12 @@ input#object_email {
 					        height: 7%;
 						   display:none; 
 					}
+					.myad {
+						float:left;
+						display:block;
+						width:100%;
+					}
+					.left,.right {
+						    width: 50%;
+						        float: left;
+						}

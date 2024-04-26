@@ -1,0 +1,1 @@
+{"redirect":"/seejob/<%=job["job_id"]%>"}

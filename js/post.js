@@ -53,8 +53,8 @@ fd.set("sent","0");
 	return false;
   });
 }
-if ($('form:not(#sendemailform)').length > 0){
-$('form:not(#sendemailform)').on('submit', function () {
+if ($('form:not(#bookatour)').length > 0){
+$('form:not(#bookatour)').on('submit', function () {
   if (window.filesize > 1024*5) {
     alert('max upload size is 5k');
 return false;

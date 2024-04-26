@@ -1,0 +1,43 @@
+<h1>job application</h1>
+<%job=params["application"]%>
+<p>
+<b>first name:</b>
+<%=job["firstname"]%>
+</p>
+<p>
+<b>last name:</b>
+<%=job["lastname"]%>
+</p>
+<p>
+<b>date of birth:</b>
+<%=job["dateofbirth"]%>
+</p>
+<p>
+<b>email:</b>
+<%=job["email"]%>
+</p>
+<p>
+<b>phone:</b>
+<%=job["phone"]%>
+</p>
+<p>
+<b>position:</b>
+<%=job["position"]%>
+</p>
+<p>
+<b>date de début de disponibilité:</b>
+<%=job["start_date"]%>
+</p>
+<p>
+<b>lettre de motivation capitaine:</b>
+<a download href="/uploads/<%=job["coverletter"]%>">télécharger</a>
+</p>
+<p>
+<b>cv capitaine:</b>
+
+<a download href="/uploads/<%=job["cv"]%>">télécharger</a>
+</p>
+<p>
+<b>moyen de transports personnels:</b>
+<%="oui" if job["transport"] == 1 else "non"%>
+</p>

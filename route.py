@@ -92,6 +92,24 @@ class Route():
           self.set_notice("erreur quand vous avez envoyé le formulaire")
         self.render_figure.set_param("search",s)
         return self.render_figure.render_figure("welcome/voirsearch.html")
+    def createapplication(self,search):
+        myparam=self.get_post_data()(params=("job_id","user_id","firstname","lastname","dateofbirth","email","phone","position","start_date","coverletter","cv","transport"))
+        hi=self.db.Application.create(myparam)
+        if hi:
+          self.set_notice("votre application a été envoyée")
+        else:
+          self.set_notice("erreur quand vous avez envoyé le formulaire")
+        self.render_figure.set_param("application",hi)
+        return self.render_some_json("welcome/myapplication.json")
+    def createjob(self,search):
+        myparam=self.get_post_data()(params=("user_id","title","location","type","salary","aboutus","description","responsibilities","requirements","howtoapply"))
+        hi=self.db.Job.create(myparam)
+        if hi:
+          self.set_notice("votre job a été ajouté")
+        else:
+          self.set_notice("erreur quand vous avez envoyé le formulaire")
+        self.render_figure.set_param("job",hi)
+        return self.render_some_json("welcome/myjob.json")
     def createmusician(self,search):
         myparam=self.get_post_data()(params=("name",))
         hi=self.db.Musician.create(myparam)
@@ -241,6 +259,12 @@ class Route():
         print("hello action")
         print("hello action")
         return self.render_figure.render_figure("welcome/aboutme.html")
+    def booktour(self,search):
+        myparam=self.get_some_post_data(params=("myoverlay",))
+        print("My param book tour ",myparam)
+        self.render_figure.set_param("overlay",myparam["myoverlay"])
+        print("hello action")
+        return self.render_figure.render_figure("welcome/booktour.html")
     def hello(self,search):
         print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
@@ -263,6 +287,18 @@ class Route():
         myparam=self.get_this_route_param(getparams,params)
         self.render_figure.set_param("post",self.db.Post.getbyid(myparam["id"]))
         return self.render_figure.render_figure("ajouter/editerpost.html")
+    def voirapplication(self,params={}):
+        getparams=("id",)
+        print("get param, action see my new",getparams)
+        myparam=self.get_this_route_param(getparams,params)
+        self.render_figure.set_param("application",self.db.Application.getbyid(myparam["id"]))
+        return self.render_figure.render_figure("ajouter/voirapplication.html")
+    def apply(self,params={}):
+        getparams=("id",)
+        print("get param, action see my new",getparams)
+        myparam=self.get_this_route_param(getparams,params)
+        self.render_figure.set_param("jobs",self.db.Job.getall())
+        return self.render_figure.render_figure("ajouter/apply.html")
     def seejob(self,params={}):
         getparams=("id",)
         print("get param, action see my new",getparams)
@@ -441,6 +477,11 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
+            "^/booktour$":self.booktour,
+            "^/apply$":self.apply,
+            "^/voirapplication/([0-9]+)$":self.voirapplication,
+            '^/createapplication$': self.createapplication,
+            '^/createjob$': self.createjob,
             '^/addjob$': self.addjob,
             "^/seejob/([0-9]+)$":self.seejob,
             '^/welcome$': self.welcome,
