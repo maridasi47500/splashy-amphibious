@@ -1,0 +1,23 @@
+<h1>AJouter une visite </h1>
+<form action="/createtour" method="post">
+<input type="hidden" name="user_id" value="<%=session["user_id"]%>" id="address_user"/>
+<div class="field">
+<label for="job_debut">heure début</label>
+<input type="time" name="debut" id="job_debut"/>
+</div>
+<div class="field">
+<label for="job_fin">heure fin</label>
+<input type="time" name="fin" id="job_fin"/>
+</div>
+<div class="field">
+<label for="job_date">date</label>
+<input type="date" name="date" id="job_date"/>
+</div>
+<div class="field">
+<label for="job_nbperson">nombre personne</label>
+<input type="number" name="nbperson" id="job_nbperson"/>
+</div>
+<div class="field">
+<input type="submit" value="ok" name="valider" id="address_submit"/>
+</div>
+</form>

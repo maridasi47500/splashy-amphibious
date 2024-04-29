@@ -20,7 +20,14 @@
 		<div class="tab-content" id="pills-tabContent">
 			<div class="tab-pane fade show active" id="pills-date" role="tabpanel" aria-labelledby="pills-date-tab" tabindex="0">
 
-				<input type="date" min="<%=date.today()%>" max="<%=(datetime.datetime.today() + datetime.timedelta(days=60, hours=-5)).date()%>">
+				<div id="mydate1">
+				<input id="choisirdate" type="date" min="<%=date.today()%>" max="<%=(datetime.datetime.today() + datetime.timedelta(days=60, hours=-5)).date()%>">
+				<div id="date1">
+				</div>
+				</div>
+				<div id="mytime1">
+					<span onclick="mydate1.style.display='block';mytime1.style.display='none';"><==</span>
+				</div>
 
 			</div>
 			    <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">...</div>

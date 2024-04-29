@@ -1,0 +1,3 @@
+{"nbtour":"<%=params["notsoldout"]%>",
+"nbschedule":"<%=params["nbschedule"]%>",
+}

@@ -247,7 +247,7 @@ class S(BaseHTTPRequestHandler):
 
 
         #logging.info(parse.parse_qs(post_data.decode('utf-8')))
-        if str(self.path) not in ["/booktour"]:
+        if str(self.path) not in ["/booktour","/nbtour"]:
           new_dict = self.deal_post_data
         else:
           print("hey")

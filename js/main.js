@@ -23,7 +23,7 @@ function myband(value){
 }
 
 $(function(){
-if (window.location.pathname === "/addjob" && myuserid.innerHTML == "") {
+if ((window.location.pathname === "/addtour" || window.location.pathname === "/addjob") && myuserid.innerHTML == "") {
 alert("pas connecté-e vous allez être redirigé(e)")
 window.location="/sign_in";
 
@@ -79,8 +79,43 @@ members.value="";
 
 });
 $(document).ready(function () {
-      $('.someselect').selectize({
-          sortField: 'text'
+      $('input[type=date]#choisirdate').change(function(){
+          $.ajax({
+		  url: "/nbtour",
+		  type:"post",
+		  data:{date: $(this).val()},
+		  success:function(data){
+			  var nbtour=data.nbtour;
+			  var nbschedule=data.nbschedule;
+			  if (nbschedule > 0){
+			  if (nbtour > 1){
+			  date1.innerHTML="<a id=\"wow1\">"+nbtour+ " tours</a>";
+			  }else if (nbtour > 0){
+			  date1.innerHTML="<a id=\"wow1\">"+nbtour+ " tour</a>";
+			  } else {
+			  date1.innerHTML="tout vendu";
+			  }
+			  wow1.onclick = function(){
+
+				  mytime1.style.display='block';
+				  mydate1.style.display='none';
+				  $.ajax({
+					  url:"/mesvisites",
+					  type:"post",
+					  data:{date:$("#choisirdate").val()},
+					  success:function(data1){
+						  var visites=data1.visites;
+					  }
+				  });
+			  }
+			  } else {
+			  date1.innerHTML="pas de visite";
+				  mydate1.style.display='block';
+				  mytime1.style.display='none';
+
+			  }
+		  }
+	  });
       });
   });
 

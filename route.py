@@ -101,6 +101,15 @@ class Route():
           self.set_notice("erreur quand vous avez envoyé le formulaire")
         self.render_figure.set_param("application",hi)
         return self.render_some_json("welcome/myapplication.json")
+    def createtour(self,search):
+        myparam=self.get_post_data()(params=("user_id","debut","fin", "date","nbperson"))
+        hi=self.db.Schedule.create(myparam)
+        if hi:
+          self.set_notice("votre visite a été ajoutée")
+        else:
+          self.set_notice("erreur quand vous avez envoyé le formulaire")
+        self.render_figure.set_param("job",hi)
+        return self.render_some_json("welcome/myjob.json")
     def createjob(self,search):
         myparam=self.get_post_data()(params=("user_id","title","location","type","salary","aboutus","description","responsibilities","requirements","howtoapply"))
         hi=self.db.Job.create(myparam)
@@ -265,6 +274,21 @@ class Route():
         self.render_figure.set_param("overlay",myparam["myoverlay"])
         print("hello action")
         return self.render_figure.render_figure("welcome/booktour.html")
+    def mesvisites(self,search):
+        myparam=self.get_some_post_data(params=("date",))
+        print("My param book tour ",myparam)
+        hey=self.db.Schedule.getallbydate1(myparam["date"])
+        self.render_figure.set_param("visites",hey)
+        print("hello action")
+        return self.render_some_json("welcome/soldout.json")
+    def nbtour(self,search):
+        myparam=self.get_some_post_data(params=("date",))
+        print("My param book tour ",myparam)
+        hey=self.db.Schedule.getallbydate(myparam["date"])
+        self.render_figure.set_param("notsoldout",hey["notsoldout"])
+        self.render_figure.set_param("nbschedule",hey["nbschedule"])
+        print("hello action")
+        return self.render_some_json("welcome/soldout.json")
     def hello(self,search):
         print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
@@ -347,6 +371,8 @@ class Route():
         return self.render_figure.render_json()
     def search(self,search): 
         return self.render_figure.render_figure("ajouter/search.html")
+    def addtour(self,search): 
+        return self.render_figure.render_figure("ajouter/tour.html")
     def addjob(self,search): 
         return self.render_figure.render_figure("ajouter/job.html")
     def addmember(self,search): 
@@ -478,10 +504,14 @@ class Route():
             print("link route ",path)
             ROUTES={
             "^/booktour$":self.booktour,
+            "^/mesvisites$":self.mesvisites,
+            "^/nbtour$":self.nbtour,
             "^/apply$":self.apply,
             "^/voirapplication/([0-9]+)$":self.voirapplication,
             '^/createapplication$': self.createapplication,
             '^/createjob$': self.createjob,
+            '^/createtour$': self.createtour,
+            '^/addtour$': self.addtour,
             '^/addjob$': self.addjob,
             "^/seejob/([0-9]+)$":self.seejob,
             '^/welcome$': self.welcome,
