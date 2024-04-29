@@ -88,3 +88,16 @@ input#object_email {
 										    top: 55px;
 										        position: absolute;
 										}
+										#mytime1{
+											display:none;
+										}
+										.mytourtime {
+											    border: 1px solid;
+											        padding: 10px;
+											}
+											div#pills-info {
+												    padding: 0 10px 0 10px;
+												        overflow-y: scroll;
+													    display: block;
+													        height: 427px;
+													}

@@ -1,0 +1,75 @@
+<p id="voirladate"></p>
+<form action="/createbooking" method="post" id="bookspotsform">
+	<div class="field number-input">
+
+		  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+		<input type="number" value="0" name="nbadult" id="booking_nbadult"/>
+		<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+		<label for="booking_nbadult">adulte (age 10 ans et +) 69 dollars</label>
+
+	</div>
+	<div class="field number-input">
+
+		  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+		<input type="number" value="0" name="nbenfant" id="booking_nbenfant"/>
+		<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+		<label for="booking_nbenfant">enfant (age entre 0 et 9 ans) 43 dollars</label>
+	</div>
+	<p>Adulte (10 ans et +)</p>
+	<p>Veuillez remplir le formulaire ci-dessous, tous les champs marqués d’un * sont obligatoires.</p>
+	<input type="hidden" name="schedule_id" value="" id="booking_schedule_id"/>
+	<div class="field">
+		<label for="booking_firstname">prenom *</label>
+		<input type="text" name="firstname" required id="booking_firstname"/>
+	</div>
+	<div class="field">
+		<label for="booking_lastname">nom *</label>
+		<input type="text" name="lastname" required id="booking_lastname"/>
+	</div>
+	<div class="field">
+		<label for="booking_country">pays *</label>
+		<input type="text" name="country" required id="booking_country"/>
+	</div>
+	<div class="field">
+		<label for="booking_email">email *</label>
+		<input type="email" name="email" required id="booking_email"/>
+	</div>
+	<div class="field">
+		<label for="booking_phone">numero *</label>
+		<input type="telephone" name="phone" required id="booking_phone"/>
+	</div>
+	<div class="field">
+		<label for="booking_aboutus">comment as tu entendu parler de nous</label>
+		<div>
+
+		<input value="facebook" type="radio" name="aboutus" id="booking_aboutus_1"/>
+		<label for="booking_aboutus_1">
+			facebook
+		</label>
+		</div>
+		<div>
+
+		<input value="friend" type="radio" name="aboutus" id="booking_aboutus_2"/>
+		<label for="booking_aboutus_2">
+			recommendé par 1 ami
+		</label>
+		</div>
+		<div>
+
+		<input value="road" type="radio" name="aboutus" id="booking_aboutus_3"/>
+		<label for="booking_aboutus_3">
+			je t'ai vu sur la route ;)
+		</label>
+		</div>
+	</div>
+		<div class="field">
+
+		<input value="1" type="checkbox" name="terms" required id="booking_terms"/>
+		<label for="booking_terms">
+			J'accepte les termes et conditions
+		</label>
+		</div>
+	<div class="field">
+		<input type="submit" value="continue to checkout" name="valider" id="booking_submit"/>
+	</div>
+</form>

@@ -1,0 +1,7 @@
+ <%="," if paspremier else ""%>{
+	 "scheduleid":"<%=visite["scheduleid"]%>",
+	 "spots":"<%=visite["spots"]%>",
+	 "debut":"<%=visite["debut"]%>",
+	 "fin":"<%=visite["fin"]%>",
+	 "date":"<%=visite["date"]%>"
+ }

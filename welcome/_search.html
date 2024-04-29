@@ -1,8 +1,0 @@
-<div class="card search">
-	<div class="card-body">
-		<h5 class="card-title"><%=s["title"]%></h5>
-		<p class="card-text"><%=s["mycontent"][(int(s["position1"])-100 if (s["position1"] - 100 > 0) else 0):(int(s["position1"])+100 if (s["position1"] + 100 < len(s["content"])) else (len(s["content"] - 1)))]%></p>
-			<a href="/voirpost/<%=s["id"]%>" class="btn btn-primary">lire le post</a>
-			      </div>
-
-</div>

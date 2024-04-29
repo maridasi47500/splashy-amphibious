@@ -101,6 +101,15 @@ class Route():
           self.set_notice("erreur quand vous avez envoyé le formulaire")
         self.render_figure.set_param("application",hi)
         return self.render_some_json("welcome/myapplication.json")
+    def createbooking(self,search):
+        myparam=self.get_post_data()(params=("nbenfant","nbadult","firstname","lastname","country","email","phone","aboutus"))
+        hi=self.db.Booking.create(myparam)
+        if hi:
+          self.set_notice("votre réservation a été envoyée")
+        else:
+          self.set_notice("erreur quand vous avez envoyé le formulaire")
+        self.render_figure.set_param("job",hi)
+        return self.render_some_json("welcome/myjob.json")
     def createtour(self,search):
         myparam=self.get_post_data()(params=("user_id","debut","fin", "date","nbperson"))
         hi=self.db.Schedule.create(myparam)
@@ -280,7 +289,7 @@ class Route():
         hey=self.db.Schedule.getallbydate1(myparam["date"])
         self.render_figure.set_param("visites",hey)
         print("hello action")
-        return self.render_some_json("welcome/soldout.json")
+        return self.render_some_json("welcome/visites.json")
     def nbtour(self,search):
         myparam=self.get_some_post_data(params=("date",))
         print("My param book tour ",myparam)
@@ -511,6 +520,7 @@ class Route():
             '^/createapplication$': self.createapplication,
             '^/createjob$': self.createjob,
             '^/createtour$': self.createtour,
+            '^/createbooking$': self.createbooking,
             '^/addtour$': self.addtour,
             '^/addjob$': self.addjob,
             "^/seejob/([0-9]+)$":self.seejob,

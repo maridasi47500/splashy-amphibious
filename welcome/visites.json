@@ -1,0 +1,3 @@
+{"visites":[
+	<%=render_collection(collection=params['visites'], partial='welcome/_visite.json', as_='visite')%>
+]}

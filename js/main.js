@@ -105,6 +105,18 @@ $(document).ready(function () {
 					  data:{date:$("#choisirdate").val()},
 					  success:function(data1){
 						  var visites=data1.visites;
+						  var visite;
+						  var date=new Date(visites[0].date+ " 00:00:00");
+						  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+						  var mydate=date.toLocaleDateString("fr-FR", options);
+						  $("#mytime1 .dates").html("<p>"+mydate+"</p><p>séléectionnez une heure</p>");
+						  for (var i = 0;i<visites.length;i++){
+							  visite=visites[i];
+							  $("#mytime1 .dates").append(`<div class="mytourtime" onclick="voirladate.innerHTML = '${mydate} - ${visite.debut} - ${visite.fin}';bookspotsform.reset();document.getElementById('pills-info-tab').click();">
+							  <p>${visite.debut} - ${visite.fin} </p>
+							  <p>${visite.spots} places disponibles</p>
+								  </div>`);
+						  }
 					  }
 				  });
 			  }

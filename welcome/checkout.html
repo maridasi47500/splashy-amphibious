@@ -1,0 +1,24 @@
+<p id="voirladate"></p>
+<form action="/createcheckout" method="post" id="bookspotsform">
+	<p>Payez avec la carte de crédit</p>
+	<input type="hidden" name="booking_id" value="" id="checkout_booking_id"/>
+	<div class="field">
+		<label for="checkout_name">Nom du titulaire du compte</label>
+		<input type="text" name="name" required id="checkout_name"/>
+	</div>
+	<div class="field">
+		<label for="checkout_number">numéro de carte</label>
+		<input type="text" name="number" required id="checkout_number"/>
+	</div>
+	<div class="field">
+		<label for="checkout_country">MM / AA</label>
+		<input type="text" name="mmaa" required id="checkout_mmaa"/>
+	</div>
+	<div class="field">
+		<label for="checkout_email">CVC</label>
+		<input type="text" name="email" required id="checkout_cvc"/>
+	</div>
+	<div class="field">
+		<input type="submit" value="payer" name="valider" id="checkout_submit"/>
+	</div>
+</form>

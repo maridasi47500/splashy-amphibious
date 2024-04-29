@@ -1,5 +1,0 @@
-<%="," if paspremier else ""%>
-{
-	"id":"<%=member["id"]%>",
-	"name":"<%=member["name"]%>"
-}

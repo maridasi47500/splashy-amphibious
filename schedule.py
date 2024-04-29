@@ -18,8 +18,13 @@ class Schedule(Model):
                     );""")
         self.con.commit()
         #self.con.close()
+    def getallbydate1(self,nbtour):
+        self.cur.execute("select schedule.*,schedule.id as scheduleid, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,schedule.nbperson - sum(ifnull(booking.nbenfant,0) + ifnull(booking.nbadult,0)) spots from schedule left outer join booking on booking.schedule_id = schedule.id group by schedule.id having schedule.date = ? and spots > 0",(nbtour,))
+
+        row=self.cur.fetchall()
+        return row
     def getallbydate(self,nbtour):
-        self.cur.execute("select schedule.*, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,count(ifnull(booking.nbenfant,0) + ifnull(booking.nbadult,0) < schedule.nbperson) notsoldout from schedule left outer join booking on booking.schedule_id = schedule.id where schedule.date = ? group by schedule.date",(nbtour,))
+        self.cur.execute("select schedule.*, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,(select count(ifnull(b.nbenfant,0) + ifnull(b.nbadult,0) < s.nbperson) from schedule s left outer join booking b on b.schedule_id = s.id group by s.id) notsoldout from schedule left outer join booking on booking.schedule_id = schedule.id where schedule.date = ? group by schedule.date",(nbtour,))
 
         row=self.cur.fetchone()
         return row
