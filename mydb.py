@@ -4,6 +4,7 @@ from country import Country
 from schedule import Schedule
 from booking import Booking
 from application import Application
+from checkout import Checkout
 class Mydb():
   def __init__(self):
     self.hey="hello"
@@ -13,3 +14,4 @@ class Mydb():
     self.Booking=Booking()
     self.Country=Country()
     self.Application=Application()
+    self.Checkout=Checkout()

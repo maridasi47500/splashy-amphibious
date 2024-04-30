@@ -82,6 +82,7 @@ return false;
 		    $("#pills-checkout-tab").click();
 		    document.getElementById("pills-checkout-tab").reset();
 		    document.getElementById("checkout_booking_id").value=data.bookingid;
+		    document.getElementById("checkout_name").value=booking_firstname.value+" "+booking_lastname.value;
 
 	    }
 },

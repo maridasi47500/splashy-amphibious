@@ -94,7 +94,7 @@ class Route():
         return self.render_figure.render_figure("welcome/voirsearch.html")
     def createcheckout(self,search):
         myparam=self.get_post_data()(params=("name","booking_id","number","mmaa","cvc"))
-        hi=self.db.Application.create(myparam)
+        hi=self.db.Checkout.create(myparam)
         if hi:
           self.set_notice("votre réservation a été payée")
         else:

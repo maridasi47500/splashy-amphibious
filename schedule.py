@@ -23,12 +23,12 @@ class Schedule(Model):
         row=self.cur.fetchone()
         return row
     def getallbydate1(self,nbtour):
-        self.cur.execute("select schedule.*,schedule.id as scheduleid, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,schedule.nbperson - sum(ifnull(booking.nbenfant,0) + ifnull(booking.nbadult,0)) spots from schedule left outer join booking on booking.schedule_id = schedule.id group by schedule.id having schedule.date = ? and spots > 0",(nbtour,))
+        self.cur.execute("select schedule.*,schedule.id as scheduleid, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,schedule.nbperson - sum(ifnull(booking.nbenfant,0) + ifnull(booking.nbadult,0)) spots from schedule left outer join booking on booking.schedule_id = schedule.id left outer join checkout on checkout.booking_id = booking.id group by schedule.id having schedule.date = ? and spots > 0 and count(distinct checkout.id) = 0",(nbtour,))
 
         row=self.cur.fetchall()
         return row
     def getallbydate(self,nbtour):
-        self.cur.execute("select schedule.*, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,(select count(distinct s.id) from schedule s left join booking b on b.schedule_id = s.id group by s.id having s.nbperson - sum(ifnull(b.nbenfant,0) + ifnull(b.nbadult,0)) > 0 and s.date = schedule.date) notsoldout from schedule left outer join booking on booking.schedule_id = schedule.id where schedule.date = ? group by schedule.date",(nbtour,))
+        self.cur.execute("select schedule.*, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,(select count(distinct s.id) from schedule s left join booking b on b.schedule_id = s.id left outer join checkout on checkout.booking_id = b.id group by s.id having s.nbperson - sum(ifnull(b.nbenfant,0) + ifnull(b.nbadult,0)) > 0 and s.date = schedule.date and count(distinct checkout.id) = 0) notsoldout from schedule left outer join booking on booking.schedule_id = schedule.id  group by schedule.date having schedule.date = ?",(nbtour,))
 
         row=self.cur.fetchone()
         return row
