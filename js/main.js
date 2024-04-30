@@ -79,6 +79,63 @@ members.value="";
 
 });
 $(document).ready(function () {
+	$(".counter").bind('mouseup', function () { 
+		var myvalue=Number($(this).val());
+		var myfield=$(this)[0];
+		$.ajax({
+			url: "/counter",
+			type:"post",
+			data:{scheduleid: booking_schedule_id.value,nbenfant: booking_nbenfant.value,nbadult: booking_nbadult.value},
+			success:function(data){
+				if (Number(data.nbperson) < 0) {
+					msgoverlay.style.display='block';
+					myfield.value=myvalue + Number(data.nbperson);
+				}
+			}
+		});
+
+
+	});
+
+	$(".counter").bind('keyup', function () { 
+		var myfield=$(this)[0];
+		var myvalue=Number($(this).val());
+		$.ajax({
+			url: "/counter",
+			type:"post",
+			data:{scheduleid: booking_schedule_id.value,nbenfant: booking_nbenfant.value,nbadult: booking_nbadult.value},
+			success:function(data){
+				if (Number(data.nbperson) < 0) {
+					msgoverlay.style.display='block';
+					myfield.value=myvalue + Number(data.nbperson);
+				}
+			}
+		});
+	});
+	$(".plus").click(function(){
+	var myfield=$(this)[0].parentNode.querySelector('input[type=number]');
+	myfield.stepUp();
+	var myvalue =Number(myfield.value);
+		$.ajax({
+			url: "/counter",
+			type:"post",
+			data:{scheduleid: booking_schedule_id.value,nbenfant: booking_nbenfant.value,nbadult: booking_nbadult.value},
+			success:function(data){
+				if (Number(data.nbperson) < 0) {
+					msgoverlay.style.display='block';
+					myfield.value=myvalue + Number(data.nbperson);
+				}
+			}
+		});
+	});
+	$(".minus").click(function(){
+	var myfield=$(this)[0].parentNode.querySelector('input[type=number]');
+	var myvalue =Number(myfield.value);
+
+		if(myvalue > 0){
+	myfield.stepDown();
+		}
+	});
       $('input[type=date]#choisirdate').change(function(){
           $.ajax({
 		  url: "/nbtour",
@@ -112,7 +169,7 @@ $(document).ready(function () {
 						  $("#mytime1 .dates").html("<p>"+mydate+"</p><p>séléectionnez une heure</p>");
 						  for (var i = 0;i<visites.length;i++){
 							  visite=visites[i];
-							  $("#mytime1 .dates").append(`<div class="mytourtime" onclick="voirladate.innerHTML = '${mydate} - ${visite.debut} - ${visite.fin}';bookspotsform.reset();document.getElementById('pills-info-tab').click();">
+							  $("#mytime1 .dates").append(`<div class="mytourtime" onclick="voirladate.innerHTML = '${mydate} - ${visite.debut} - ${visite.fin}';bookspotsform.reset();booking_schedule_id.value='${visite.scheduleid}';document.getElementById('pills-info-tab').click();">
 							  <p>${visite.debut} - ${visite.fin} </p>
 							  <p>${visite.spots} places disponibles</p>
 								  </div>`);

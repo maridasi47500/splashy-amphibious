@@ -102,14 +102,14 @@ class Route():
         self.render_figure.set_param("application",hi)
         return self.render_some_json("welcome/myapplication.json")
     def createbooking(self,search):
-        myparam=self.get_post_data()(params=("nbenfant","nbadult","firstname","lastname","country","email","phone","aboutus"))
+        myparam=self.get_post_data()(params=("schedule_id","nbenfant","notes","nbadult","firstname","lastname","country","email","phone","aboutus"))
         hi=self.db.Booking.create(myparam)
         if hi:
           self.set_notice("votre réservation a été envoyée")
         else:
           self.set_notice("erreur quand vous avez envoyé le formulaire")
-        self.render_figure.set_param("job",hi)
-        return self.render_some_json("welcome/myjob.json")
+        self.render_figure.set_param("bookingid",hi["booking_id"])
+        return self.render_some_json("welcome/mybooking.json")
     def createtour(self,search):
         myparam=self.get_post_data()(params=("user_id","debut","fin", "date","nbperson"))
         hi=self.db.Schedule.create(myparam)
@@ -283,6 +283,13 @@ class Route():
         self.render_figure.set_param("overlay",myparam["myoverlay"])
         print("hello action")
         return self.render_figure.render_figure("welcome/booktour.html")
+    def counter(self,search):
+        myparam=self.get_some_post_data(params=("scheduleid","nbenfant","nbadult",))
+        print("My param book tour ",myparam)
+        hey=self.db.Schedule.getnbperson(myparam["scheduleid"], myparam["nbenfant"],myparam["nbadult"])
+        self.render_figure.set_param("nbperson",hey["spots"])
+        print("hello action")
+        return self.render_some_json("welcome/counter.json")
     def mesvisites(self,search):
         myparam=self.get_some_post_data(params=("date",))
         print("My param book tour ",myparam)
@@ -512,6 +519,7 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
+            "^/counter$":self.counter,
             "^/booktour$":self.booktour,
             "^/mesvisites$":self.mesvisites,
             "^/nbtour$":self.nbtour,

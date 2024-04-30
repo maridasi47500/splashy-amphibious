@@ -53,8 +53,8 @@ fd.set("sent","0");
 	return false;
   });
 }
-if ($('form:#bookspotsform').length > 0){
-$('form:#bookspotsform').on('submit', function () {
+if ($('form#bookspotsform').length > 0){
+$('form#bookspotsform').on('submit', function () {
   if (window.filesize > 1024*5) {
     alert('max upload size is 5k');
 return false;
@@ -81,6 +81,7 @@ return false;
 	    if (data.bookingid){
 		    $("#pills-checkout-tab").click();
 		    document.getElementById("pills-checkout-tab").reset();
+		    document.getElementById("checkout_booking_id").value=data.bookingid;
 
 	    }
 },

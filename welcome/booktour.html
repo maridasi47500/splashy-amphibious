@@ -3,6 +3,7 @@
 <h1>120 min Tour</h1>
 <div id="overlay" style="display:<%="block" if params["overlay"] == "1" else "none"%>;">
 	<div id="text">
+		<span class="fermer" onclick="overlay.style.display='none';">X</span>
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 			  <li class="nav-item" role="presentation">
 				      <button class="nav-link active" id="pills-date-tab" data-bs-toggle="pill" data-bs-target="#pills-date" type="button" role="tab" aria-controls="pills-date" aria-selected="true">&#128197;</button>
@@ -31,8 +32,13 @@
 				</div>
 
 			</div>
-			<div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0"><%=Fichier("./welcome","form.html").lire()%></div>
-			      <div class="tab-pane fade" id="pills-checkout" role="tabpanel" aria-labelledby="pills-checkout-tab" tabindex="0">...</div>
+			<div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
+				<%=Fichier("./welcome","form.html").lire()%>
+			</div>
+			      <div class="tab-pane fade" id="pills-checkout" role="tabpanel" aria-labelledby="pills-checkout-tab" tabindex="0">
+				<%=Fichier("./welcome","checkout.html").lire()%>
+
+			      </div>
 		</div>
 	</div>
 </div>

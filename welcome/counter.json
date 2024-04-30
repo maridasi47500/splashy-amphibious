@@ -1,0 +1,1 @@
+{"nbperson":"<%=params["nbperson"]%>"}

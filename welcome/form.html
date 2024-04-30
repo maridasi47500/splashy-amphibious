@@ -2,17 +2,17 @@
 <form action="/createbooking" method="post" id="bookspotsform">
 	<div class="field number-input">
 
-		  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-		<input type="number" value="0" name="nbadult" id="booking_nbadult"/>
-		<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+		  <button class="minus"></button>
+		<input type="number" class="counter" min="0" value="0" name="nbadult" id="booking_nbadult"/>
+		<button class="plus"></button>
 		<label for="booking_nbadult">adulte (age 10 ans et +) 69 dollars</label>
 
 	</div>
 	<div class="field number-input">
 
-		  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-		<input type="number" value="0" name="nbenfant" id="booking_nbenfant"/>
-		<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+		  <button class="minus"></button>
+		<input type="number" value="0" class="counter" min="0" name="nbenfant" id="booking_nbenfant"/>
+		<button class="plus"></button>
 		<label for="booking_nbenfant">enfant (age entre 0 et 9 ans) 43 dollars</label>
 	</div>
 	<p>Adulte (10 ans et +)</p>
@@ -37,6 +37,11 @@
 	<div class="field">
 		<label for="booking_phone">numero *</label>
 		<input type="telephone" name="phone" required id="booking_phone"/>
+	</div>
+	<div class="field">
+		<label for="booking_notes">notes *</label>
+		<textarea name="notes" id="booking_notes">
+		</textarea>
 	</div>
 	<div class="field">
 		<label for="booking_aboutus">comment as tu entendu parler de nous</label>
@@ -73,3 +78,7 @@
 		<input type="submit" value="continue to checkout" name="valider" id="booking_submit"/>
 	</div>
 </form>
+<div id="msgoverlay">
+	<div id="msgtext">Vous avez sélectionné trop de tickets<br>
+		<a onclick="msgoverlay.style.display='none';">[X] FERMER</a></div>
+</div>
