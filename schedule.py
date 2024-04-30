@@ -28,7 +28,7 @@ class Schedule(Model):
         row=self.cur.fetchall()
         return row
     def getallbydate(self,nbtour):
-        self.cur.execute("select schedule.*, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,(select count(s.id) from schedule s left outer join booking b on b.schedule_id = s.id group by s.id having s.nbperson - sum(ifnull(b.nbenfant,0) + ifnull(b.nbadult,0)) > 0 and s.date = schedule.date) notsoldout from schedule left outer join booking on booking.schedule_id = schedule.id where schedule.date = ? group by schedule.date",(nbtour,))
+        self.cur.execute("select schedule.*, count(booking.id) as nbbooking,count(schedule.id) as nbschedule,(select count(distinct s.id) from schedule s left join booking b on b.schedule_id = s.id group by s.id having s.nbperson - sum(ifnull(b.nbenfant,0) + ifnull(b.nbadult,0)) > 0 and s.date = schedule.date) notsoldout from schedule left outer join booking on booking.schedule_id = schedule.id where schedule.date = ? group by schedule.date",(nbtour,))
 
         row=self.cur.fetchone()
         return row

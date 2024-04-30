@@ -92,6 +92,15 @@ class Route():
           self.set_notice("erreur quand vous avez envoyé le formulaire")
         self.render_figure.set_param("search",s)
         return self.render_figure.render_figure("welcome/voirsearch.html")
+    def createcheckout(self,search):
+        myparam=self.get_post_data()(params=("name","booking_id","number","mmaa","cvc"))
+        hi=self.db.Application.create(myparam)
+        if hi:
+          self.set_notice("votre réservation a été payée")
+        else:
+          self.set_notice("erreur quand vous avez envoyé le formulaire")
+        self.render_figure.set_param("url","/")
+        return self.render_some_json("welcome/myurl.json")
     def createapplication(self,search):
         myparam=self.get_post_data()(params=("job_id","user_id","firstname","lastname","dateofbirth","email","phone","position","start_date","coverletter","cv","transport"))
         hi=self.db.Application.create(myparam)
@@ -519,6 +528,7 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
+            "^/createcheckout$":self.createcheckout,
             "^/counter$":self.counter,
             "^/booktour$":self.booktour,
             "^/mesvisites$":self.mesvisites,

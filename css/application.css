@@ -68,12 +68,13 @@ input#object_email {
 						        float: left;
 						}
 						li.nav-item[role=presentation] {
-							    width: 33%;
 							    position:relative;
+							    width:33%;
+							    text-align:center;
+							    justify-content:center;
+							    display:flex;
 						    }
 						li.nav-item[role=presentation] button{
-							    left: 0;
-							    right: 0;
 							    position:absolute;
 						    }
 						    #pills-tab {

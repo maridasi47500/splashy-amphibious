@@ -12,11 +12,11 @@
 	</div>
 	<div class="field">
 		<label for="checkout_country">MM / AA</label>
-		<input type="text" name="mmaa" required id="checkout_mmaa"/>
+		<input type="text" name="mmaa" title="veuillez modifier le champ en MM/AA" pattern="(0[1-9]|1[0-2])\/([0-9]{2})" required id="checkout_mmaa"/>
 	</div>
 	<div class="field">
 		<label for="checkout_email">CVC</label>
-		<input type="text" name="email" required id="checkout_cvc"/>
+		<input type="text" name="cvc" required id="checkout_cvc" pattern="[0-9]{3,4}" title="veuillez un code CVC 3 ou 4 chiffres"/>
 	</div>
 	<div class="field">
 		<input type="submit" value="payer" name="valider" id="checkout_submit"/>
